@@ -1,18 +1,15 @@
 Commands on Amazon linux
-
- 1  sudo yum update -y
+1  sudo yum update -y
     3  sudo yum install java-1.8.0-amazon-corretto.x86_64 -y
     4  java -version
     6  sudo vim NemoWorld.java
 -------------------------------------------------
-
 public class NemoWorld {
   public static void main(String[] args){
     System.out.println("Myworld :) ");
   }
 }
 -------------------------------------------------
-
     8  ls -l
    10  sudo yum install java-devel
    11  javac NemoWorld.java
@@ -22,7 +19,6 @@ Manifest-Version: 1.0
 Created-By: Me
 Main-Class: NemoWorld
 ------------------------------------------------
-
    14  jar cfm NemoWorld.jar manifest.txt NemoWorld.class
    15  java -jar NemoWorld.jar
    16  sudo yum install docker
@@ -35,7 +31,6 @@ ADD NemoWorld.jar NemoWorld.jar
 EXPOSE 8080
 CMD java -jar NemoWorld.jar
 --------------------------------------------------
-
    29  sudo docker build -t nemoworld .
    31  sudo docker images
    32  sudo docker run nemoworld
@@ -45,17 +40,10 @@ CMD java -jar NemoWorld.jar
    37  sudo docker images
    39  sudo docker push nemokaushik/nemoworld:ver_1
 
-
-
 aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin 632940730145.dkr.ecr.ap-southeast-1.amazonaws.com
 
-
-
 docker tag nemoworld:latest 632940730145.dkr.ecr.ap-southeast-1.amazonaws.com/nemo
-
 632940730145.dkr.ecr.ap-southeast-1.amazonaws.com/nemo:v2
-
-
 
 ------------------------------------------------------------------------------------------------------------------------------------
 Commands on Ubuntu linux
