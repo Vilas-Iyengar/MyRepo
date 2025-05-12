@@ -1,0 +1,75 @@
+Commands on Amazon linux
+
+ 1  sudo yum update -y
+    3  sudo yum install java-1.8.0-amazon-corretto.x86_64 -y
+    4  java -version
+    6  sudo vim NemoWorld.java
+-------------------------------------------------
+
+public class NemoWorld {
+  public static void main(String[] args){
+    System.out.println("Myworld :) ");
+  }
+}
+-------------------------------------------------
+
+    8  ls -l
+   10  sudo yum install java-devel
+   11  javac NemoWorld.java
+   12  sudo vim manifest.txt
+------------------------------------------------
+Manifest-Version: 1.0
+Created-By: Me
+Main-Class: NemoWorld
+------------------------------------------------
+
+   14  jar cfm NemoWorld.jar manifest.txt NemoWorld.class
+   15  java -jar NemoWorld.jar
+   16  sudo yum install docker
+   17  sudo service docker start
+   18  sudo vim Dockerfile
+-------------------------------------------------
+FROM openjdk:24
+WORKDIR /
+ADD NemoWorld.jar NemoWorld.jar
+EXPOSE 8080
+CMD java -jar NemoWorld.jar
+--------------------------------------------------
+
+   29  sudo docker build -t nemoworld .
+   31  sudo docker images
+   32  sudo docker run nemoworld
+   34  sudo docker login --username=nemokaushik
+   35  sudo docker images
+   36  sudo docker tag 08b818cb3676 nemokaushik/nemoworld:ver_1
+   37  sudo docker images
+   39  sudo docker push nemokaushik/nemoworld:ver_1
+
+
+
+aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin 632940730145.dkr.ecr.ap-southeast-1.amazonaws.com
+
+
+
+docker tag nemoworld:latest 632940730145.dkr.ecr.ap-southeast-1.amazonaws.com/nemo
+
+632940730145.dkr.ecr.ap-southeast-1.amazonaws.com/nemo:v2
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------
+Commands on Ubuntu linux
+   1  clear
+    2  sudo apt update
+    4  sudo apt install apt-transport-https ca-certificates curl software-properties-common
+    5  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+    6  sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+    8  sudo apt-cache policy docker-ce
+    9  sudo apt install docker-ce
+   10  sudo systemctl status docker
+   11  docker version
+   12  sudo docker version
+   13  sudo docker login --username=nemokaushik
+   14  sudo docker pull nemokaushik/nemoworld:ver_1
+   15  sudo docker images
+   16  sudo docker run 08b818cb3676
