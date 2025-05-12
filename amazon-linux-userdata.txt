@@ -1,0 +1,28 @@
+#!/bin/bash
+# Update system and install dependencies
+yum update -y
+yum install -y java-1.8.0 wget ruby
+
+# Install Tomcat
+cd /opt
+wget https://urldefense.com/v3/__https://archive.apache.org/dist/tomcat/tomcat-9/v9.0.75/bin/apache-tomcat-9.0.75.tar.gz__;!!Ebr-cpPeAnfNniQ8HSAI-g_K5b7VKg!JmP_v4W8LVibRCW7OBMD_aiGQsd9YkDttefTR_kjot2VQPk2XksCY4Y6OIA233Xvop_jvF9VIyiocVIhMLtuK__OmtAeiS4$ 
+tar -xzf apache-tomcat-9.0.75.tar.gz
+mv apache-tomcat-9.0.75 tomcat
+chmod +x /opt/tomcat/bin/*.sh
+
+# Change Tomcat HTTP port to 80
+sed -i 's/Connector port="8080"/Connector port="80"/' /opt/tomcat/conf/server.xml
+
+# Set permissions to ec2-user
+chown -R ec2-user:ec2-user /opt/tomcat
+
+# Start Tomcat
+/opt/tomcat/bin/startup.sh
+
+# Install AWS CodeDeploy Agent
+cd /home/ec2-user
+wget https://urldefense.com/v3/__https://aws-codedeploy-ap-south-1.s3.ap-south-1.amazonaws.com/latest/install__;!!Ebr-cpPeAnfNniQ8HSAI-g_K5b7VKg!JmP_v4W8LVibRCW7OBMD_aiGQsd9YkDttefTR_kjot2VQPk2XksCY4Y6OIA233Xvop_jvF9VIyiocVIhMLtuK__O-ZKx-QM$ 
+chmod +x ./install
+./install auto
+systemctl start codedeploy-agent
+systemctl enable codedeploy-agent
