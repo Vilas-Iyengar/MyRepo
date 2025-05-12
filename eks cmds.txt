@@ -1,0 +1,47 @@
+
+   10  ARCH=amd64
+   11  PLATFORM=$(uname -s)_$ARCH
+   12  ls -l
+   13  sudo rm -rf eksctl_amd64.tar.gz
+   14  curl -sLO "https://urldefense.com/v3/__https://github.com/eksctl-io/eksctl/releases/latest/download/eksctl_$PLATFORM.tar.gz__;!!Ebr-cpPeAnfNniQ8HSAI-g_K5b7VKg!OhzzqbmYOIO0xqKLsYfSq-oKnoA2jqptYeCIICvs3jz7wQh6NtvuPxJOJoWzYJ5GktxAB-ETXKwlmvMEWjooAZ3BaAYXd9k$ "
+   15  ls -l
+   17  tar -xzf eksctl_$PLATFORM.tar.gz -C /tmp && rm eksctl_$PLATFORM.tar.gz
+   18  sudo mv /tmp/eksctl /usr/local/bin
+   19  wget https://urldefense.com/v3/__https://amazon-eks.s3.us-west-2.amazonaws.com/1.16.8/2020-04-16/bin/linux/amd64/kubectl__;!!Ebr-cpPeAnfNniQ8HSAI-g_K5b7VKg!OhzzqbmYOIO0xqKLsYfSq-oKnoA2jqptYeCIICvs3jz7wQh6NtvuPxJOJoWzYJ5GktxAB-ETXKwlmvMEWjooAZ3BvJMWlSs$ 
+   20  chmod +x ./kubectl
+   21  mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
+   22  kubectl version --short --client
+   23   eksctl create cluster --name ashish --version 1.25 --region ap-south-1 --nodegroup-name ashish-workers --node-type t3.medium --nodes 2 --nodes-min 1 --nodes-max 3 --managed
+   25  kubectl get po -A
+   26  kubectl apply -f deployment.yaml
+   27  kubectl get po -A
+   28  kubectl get svc -A
+   29  vim service.yaml
+   30  kubectl get svc -A
+   31  kubectl apply -f service.yaml
+   32  kubectl get svc -A
+   33  kubectl get nodes
+   34  kubectl get po -A
+   35  clear
+   36  vim cluster-autoscaler.yaml
+   37  kubectl apply -f cluster-autoscaler.yaml
+   38  kubectl get po -A
+   39  kubectl apply -f https://urldefense.com/v3/__https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yam__;!!Ebr-cpPeAnfNniQ8HSAI-g_K5b7VKg!OhzzqbmYOIO0xqKLsYfSq-oKnoA2jqptYeCIICvs3jz7wQh6NtvuPxJOJoWzYJ5GktxAB-ETXKwlmvMEWjooAZ3BlvD8OSw$ 
+   40  kubectl apply -f https://urldefense.com/v3/__https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml__;!!Ebr-cpPeAnfNniQ8HSAI-g_K5b7VKg!OhzzqbmYOIO0xqKLsYfSq-oKnoA2jqptYeCIICvs3jz7wQh6NtvuPxJOJoWzYJ5GktxAB-ETXKwlmvMEWjooAZ3BowbUPfQ$ 
+   41  kubectl get po -A
+   42  kubectl logs -l app=cluster-autoscaler -n kubesystem -f
+   43  kubectl get po -A
+   44  kubectl get nodes
+   45  kubectl describe pods
+   46  kubectl get pods
+   47  kubectl describe pods
+   48  clear
+   49  kubectl describe pods
+   50  vim cluster-autoscaler.yaml
+   51  kubectl describe pods
+   52  kubectl get pods
+   53  kubectl get po -A
+   54  kubectl get pods -A
+   55  eksctl delete cluster --name ashish
+   56  aws configure
+   57  eksctl delete cluster --name ashish
